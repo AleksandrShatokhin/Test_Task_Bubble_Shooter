@@ -11,26 +11,26 @@ public class BubbleCollision : MonoBehaviour
     [SerializeField] private LayerMask bubbleMask;
 
 
-    public void ChainReaction(Vector2 position)
-    {
-        Collider2D[] collid = Physics2D.OverlapCircleAll(position, radius, bubbleMask);
-
-        foreach (var id in collid)
-        {
-            if (id.GetComponent<BubbleCollision>().GetBubbleColor() == this.bubbleColor)
-            {
-                Destroy(id.gameObject);
-            }
-        }
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.layer == 8)
         {
             if (collision.gameObject.GetComponent<BubbleCollision>().GetBubbleColor() == this.bubbleColor)
             {
-                ChainReaction(collision.transform.position);
+                Destroy(this.gameObject);
+            }
+        }
+    }
+
+    private void OnDestroy()
+    {
+        Collider2D[] collid = Physics2D.OverlapCircleAll(this.transform.position, radius, bubbleMask);
+
+        foreach (var id in collid)
+        {
+            if (id.GetComponent<BubbleCollision>().GetBubbleColor() == this.bubbleColor)
+            {
+                DestroyImmediate(id.gameObject);
             }
         }
     }

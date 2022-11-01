@@ -15,8 +15,12 @@ public class BubbleRotation : BubbleController
 
     private void Update()
     {
-        CheckAngleRotation();
-        RotateBubble();
+        if (isUsed && GameController.GetInstance().IsMousePositionAcceptableForClick())
+        {
+            CheckAngleRotation();
+            RotateBubble();
+        }
+        
     }
 
     private void CheckAngleRotation()
@@ -66,6 +70,7 @@ public class BubbleRotation : BubbleController
         if (MouseReleased)
         {
             aim.SetActive(false);
+            IsUsed_Off();
         }
     }
 }

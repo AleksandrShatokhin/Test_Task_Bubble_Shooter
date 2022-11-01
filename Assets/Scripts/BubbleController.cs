@@ -11,5 +11,13 @@ public class BubbleController : MonoBehaviour
     protected bool MousePressed { get { return Input.GetMouseButton((int)MouseButton.Left); } }
     protected bool MouseReleased { get { return Input.GetMouseButtonUp((int)MouseButton.Left); } }
 
-    protected Vector2 bubbleStopped = new Vector2(0.0f, 0.0f);
+    protected Vector2 BubbleStopped(Rigidbody2D rb_bubble)
+    {
+        rb_bubble.constraints = RigidbodyConstraints2D.FreezeAll;
+        return new Vector2(0.0f, 0.0f);
+    }
+
+    [SerializeField] protected bool isUsed;
+    protected void IsUsed_On() => isUsed = true;
+    protected void IsUsed_Off() => isUsed = false;
 }

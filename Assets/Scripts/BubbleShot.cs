@@ -17,17 +17,20 @@ public class BubbleShot : BubbleController
     private void Update()
     {
         bubbleSpeed = rb_Bubble.velocity;
-    }
 
-    private void FixedUpdate()
-    {
-        if (MouseReleased)
+        if (MouseReleased && isUsed && GameController.GetInstance().IsMousePositionAcceptableForClick())
         {
             Shot();
+            IsUsed_Off();
         }
     }
 
-    private void Shot() => rb_Bubble.AddForce(transform.up * forceRate, ForceMode2D.Impulse);
+    private void Shot()
+    {
+        rb_Bubble.AddForce(transform.up * forceRate, ForceMode2D.Impulse);
+        GetComponent<CircleCollider2D>().enabled = true;
+        StartCoroutine(GameController.GetInstance().CreateNewBubble());
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -40,7 +43,7 @@ public class BubbleShot : BubbleController
         }
         else
         {
-            rb_Bubble.velocity = bubbleStopped;
+            rb_Bubble.velocity = BubbleStopped(this.rb_Bubble);
         }
     }
 }
