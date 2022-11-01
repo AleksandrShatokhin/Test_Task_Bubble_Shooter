@@ -80,4 +80,6 @@ public class GameController : MonoBehaviour
 
         return isCanPlay;
     }
+
+    public GameObject GetBubblesInScene() => bubblesInScene;
 }

@@ -44,6 +44,7 @@ public class BubbleShot : BubbleController
         else
         {
             rb_Bubble.velocity = BubbleStopped(this.rb_Bubble);
+            this.gameObject.transform.SetParent(GameController.GetInstance().GetBubblesInScene().transform);
         }
     }
 }
