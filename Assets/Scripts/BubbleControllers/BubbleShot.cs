@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BubbleShot : BubbleController
@@ -34,7 +32,7 @@ public class BubbleShot : BubbleController
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == 3)
+        if (collision.gameObject.layer == (int)Layers.Bound)
         {
             var currentSpeed = bubbleSpeed.magnitude;
             Vector2 m_dir = Vector2.Reflect(bubbleSpeed.normalized, collision.contacts[0].normal);

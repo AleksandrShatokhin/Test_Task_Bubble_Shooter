@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EndGameScene : MonoBehaviour
@@ -9,5 +7,6 @@ public class EndGameScene : MonoBehaviour
     public void ExitToMainMenu()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(mainMenu);
+        SelectedStateLevel.ClearStateLevel();
     }
 }

@@ -25,13 +25,11 @@ public class BubbleRotation : BubbleController
 
     private void CheckAngleRotation()
     {
-        // Left Angle
         if (transform.eulerAngles.z > maxLeftAngle && transform.eulerAngles.z < 180.0f)
         {
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, 75.0f);
         }
 
-        // Right Angle
         if (transform.eulerAngles.z < maxRightAngle && transform.eulerAngles.z > 180.0f)
         {
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, 285.0f);

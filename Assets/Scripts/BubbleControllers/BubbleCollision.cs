@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BubbleCollision : MonoBehaviour
@@ -13,7 +11,7 @@ public class BubbleCollision : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == 8)
+        if (collision.gameObject.layer == (int)Layers.Bubbles)
         {
             if (collision.gameObject.GetComponent<BubbleCollision>().GetBubbleColor() == this.bubbleColor)
             {
@@ -24,13 +22,18 @@ public class BubbleCollision : MonoBehaviour
 
     private void OnDestroy()
     {
+        ChainReactionOfDestroyBubbles();
+    }
+
+    private void ChainReactionOfDestroyBubbles()
+    {
         Collider2D[] collid = Physics2D.OverlapCircleAll(this.transform.position, radius, bubbleMask);
 
         foreach (var id in collid)
         {
             if (id.GetComponent<BubbleCollision>().GetBubbleColor() == this.bubbleColor)
             {
-                DestroyImmediate(id.gameObject);
+                Destroy(id.gameObject);
             }
         }
     }
